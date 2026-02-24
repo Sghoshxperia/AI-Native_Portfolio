@@ -482,9 +482,9 @@ export default function About() {
             ))}
 
             {/* Education photos + caption */}
-            <div className="reveal reveal-delay-2 flex items-center gap-8">
+            <div className="reveal reveal-delay-2 flex flex-col md:flex-row items-center md:items-start gap-8">
               {/* Overlapping slanted photos */}
-              <div className="relative flex-shrink-0 w-[260px] h-[400px]">
+              <div className="relative flex-shrink-0 w-[260px] h-[400px] mx-auto md:mx-0">
                 {/* Front photo — rotated left */}
                 <div className="absolute top-0 left-0 w-[185px] aspect-[3/4] rounded-xl border border-border overflow-hidden shadow-lg -rotate-6 z-20">
                   <Image
