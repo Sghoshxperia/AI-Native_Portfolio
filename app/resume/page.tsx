@@ -3,8 +3,8 @@ import PageWrapper from "@/components/PageWrapper";
 import Resume from "@/components/Resume";
 
 export const metadata: Metadata = {
-  title: "Resume – [[HERO_NAME]]",
-  description: "[[META_DESCRIPTION]]",
+  title: "Resume – Soham Ghosh",
+  description: "Resume of Soham Ghosh — backend software engineer with experience at Nokia and Juniper Networks.",
 };
 
 export default function ResumePage() {

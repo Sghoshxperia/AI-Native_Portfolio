@@ -3,8 +3,8 @@ import PageWrapper from "@/components/PageWrapper";
 import Projects from "@/components/Projects";
 
 export const metadata: Metadata = {
-  title: "Projects – [[HERO_NAME]]",
-  description: "[[META_DESCRIPTION]]",
+  title: "Projects – Soham Ghosh",
+  description: "Explore projects by Soham Ghosh — from network automation toolkits to robotics and AI systems.",
 };
 
 export default function ProjectsPage() {

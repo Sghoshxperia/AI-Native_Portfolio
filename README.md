@@ -31,6 +31,7 @@ A minimal, fast, and fully responsive personal portfolio built with **Next.js 15
 - **CV direct download** — one-click PDF download from the hero
 - **Multi-page routing** — dedicated `/about`, `/projects`, and `/resume` pages with full detail
 - **Dark theme** — CSS variable-based design token system for consistent theming
+- **Security hardened** — HTTP security headers (X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) set via Next.js config
 
 ---
 
@@ -80,16 +81,16 @@ MyPortfolio/
 │   ├── ShootingStars.tsx     # Canvas shooting stars animation
 │   ├── CursorGlow.tsx        # Cursor follow glow effect
 │   ├── WorldMap.tsx          # react-simple-maps world map
-│   └── PageWrapper.tsx       # Page transition wrapper
+│   ├── PageWrapper.tsx       # Page transition wrapper
+│   └── icons.tsx             # Shared SVG icon components
 │
 ├── public/
 │   ├── images/               # Profile, about, and education photos
 │   └── Soham_Ghosh_CV.pdf    # Downloadable CV
 │
 ├── types/                    # Shared TypeScript type definitions
-├── hooks/                    # Custom React hooks
 ├── tailwind.config.ts        # Tailwind theme configuration
-└── next.config.mjs           # Next.js configuration
+└── next.config.mjs           # Next.js config + HTTP security headers
 ```
 
 ---

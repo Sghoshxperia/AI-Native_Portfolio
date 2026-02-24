@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   title: "Soham Ghosh – Backend Software Engineer",
   description: "Backend Software Engineer building scalable systems and exploring agentic AI.",
   authors: [{ name: "Soham Ghosh" }],
-  keywords: ["[[META_KEYWORD_1]]", "[[META_KEYWORD_2]]", "[[META_KEYWORD_3]]"],
+  keywords: ["backend engineer", "software engineer", "Next.js portfolio", "Soham Ghosh", "network automation", "agentic AI"],
   openGraph: {
     title: "Soham Ghosh – Backend Software Engineer",
     description: "Backend Software Engineer building scalable systems and exploring agentic AI.",
