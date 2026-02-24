@@ -1,0 +1,264 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --color-background:    #0a0a0f;
+  --color-surface:       #111118;
+  --color-surface-alt:   #1a1a24;
+  --color-border:        #2a2a38;
+  --color-text-primary:  #f0f0f5;
+  --color-text-secondary:#b0b0c0;
+  --color-text-muted:    #6b6b80;
+  --color-accent:        #6366f1;
+  --color-accent-hover:  #818cf8;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}
+
+body {
+  background-color: var(--color-background);
+  /* Ambient light sources — stays fixed while content scrolls */
+  background-image:
+    radial-gradient(ellipse 90% 55% at 8%  8%,  rgba(99, 102, 241, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 92% 92%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 55% 40% at 58% 20%, rgba(139, 92,  246, 0.04) 0%, transparent 48%);
+  background-attachment: fixed;
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+/* Grain / frosted-glass surface texture */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  background-repeat: repeat;
+}
+
+/* Headings keep Inter for a sharper, tighter feel */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+}
+
+/* ── Skip link ─────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-accent);
+  color: #fff;
+  border-radius: 0 0 0.25rem 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--color-accent-hover);
+  outline-offset: 2px;
+}
+
+/* ── Focus visible ─────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Scroll-reveal utility (fade-up, fires once) ───────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  /* GPU-composited properties only — no layout recalculation */
+  will-change: transform, opacity;
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  will-change: transform, opacity;
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
+
+/* ── Section-header swipe (replays on each scroll entry) ───── */
+/* 80 px travel gives a noticeable but still clean arc */
+.swipe-left {
+  opacity: 0;
+  transform: translateX(-80px);
+  will-change: transform, opacity;
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.swipe-right {
+  opacity: 0;
+  transform: translateX(80px);
+  will-change: transform, opacity;
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.swipe-left.in,
+.swipe-right.in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Page entry (route transitions) ───────────────────────── */
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-enter {
+  animation: pageIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-background); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
+
+/* ── Selection ─────────────────────────────────────────────── */
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* ── Quote word-by-word animation ─────────────────────────── */
+.quote-word {
+  display: inline-block;
+  margin-right: 0.3em;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.quote-in .quote-word {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── World map marker pulse ────────────────────────────────── */
+@keyframes markerPulse {
+  0%   { transform: scale(1);   opacity: 0.5; }
+  100% { transform: scale(3);   opacity: 0;   }
+}
+.marker-pulse {
+  animation: markerPulse 2.4s ease-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ── World map drop / roll-up animation ───────────────────── */
+@keyframes mapDropIn {
+  0%   { opacity: 0; transform: translateY(-50px) scaleY(0.4); }
+  55%  { opacity: 1; transform: translateY(6px)   scaleY(1.03); }
+  75%  { transform: translateY(-3px) scaleY(0.98); }
+  100% { opacity: 1; transform: translateY(0)     scaleY(1); }
+}
+
+@keyframes mapRollUp {
+  0%   { opacity: 1; transform: translateY(0)     scaleY(1); }
+  100% { opacity: 0; transform: translateY(-40px) scaleY(0.2); }
+}
+
+.map-drop-in {
+  transform-origin: top center;
+  animation: mapDropIn 0.75s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+.map-roll-up {
+  transform-origin: top center;
+  animation: mapRollUp 0.4s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+
+/* ── Timeline dot glow pulse ───────────────────────────────── */
+@keyframes timelinePulse {
+  0%   { box-shadow: 0 0 0 0px  rgba(99, 102, 241, 0.7); }
+  65%  { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);   }
+  100% { box-shadow: 0 0 0 0px  rgba(99, 102, 241, 0);   }
+}
+.timeline-dot {
+  animation: timelinePulse 2.2s ease-out infinite;
+}
+
+/* ── Experience card scroll-in / scroll-out ───────────────── */
+.exp-card {
+  opacity: 0;
+  transform: translateY(28px);
+  will-change: transform, opacity;
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.exp-card.exp-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Shooting star ─────────────────────────────────────────── */
+/* Total cycle = duration. Shooting occupies first ~6%; rest is
+   invisible hold so stars fire occasionally, not constantly.    */
+@keyframes shootingStar {
+  0%     { transform: translate(0, 0);           opacity: 0; }
+  3%     { opacity: 1; }
+  6%     { transform: translate(240px, 240px);   opacity: 0; }
+  6.5%   { transform: translate(0, 0);           opacity: 0; }
+  100%   { transform: translate(0, 0);           opacity: 0; }
+}
+
+/* ── Robotic arm joint pulse ───────────────────────────────── */
+@keyframes jointPulseRing {
+  0%   { transform: scale(1); opacity: 0.55; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.joint-pulse-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: jointPulseRing 2.4s ease-out infinite;
+}
+
+/* ── Scroll snap (home page only via .snap-home on <html>) ──── */
+/* proximity: snaps when near a boundary, still allows scrolling past */
+html.snap-home {
+  scroll-snap-type: y proximity;
+}
+html.snap-home section {
+  scroll-snap-align: start;
+}
