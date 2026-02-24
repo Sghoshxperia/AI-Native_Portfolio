@@ -4,6 +4,7 @@ import "./globals.css";
 import SideNav from "@/components/SideNav";
 import CursorGlow from "@/components/CursorGlow";
 import ShootingStars from "@/components/ShootingStars";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -51,6 +52,7 @@ export default function RootLayout({
         <ShootingStars />
         <SideNav />
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
