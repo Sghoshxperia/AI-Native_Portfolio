@@ -2,6 +2,7 @@ import Navbar           from "@/components/Navbar";
 import Hero             from "@/components/Hero";
 import AboutPreview     from "@/components/AboutPreview";
 import ProjectsPreview  from "@/components/ProjectsPreview";
+import BlogPreview      from "@/components/BlogPreview";
 import Contact          from "@/components/Contact";
 import Footer           from "@/components/Footer";
 import ScrollAnimations from "@/components/ScrollAnimations";
@@ -17,6 +18,7 @@ export default function Home() {
         <Hero />
         <AboutPreview />
         <ProjectsPreview />
+        <BlogPreview />
         <Contact />
       </main>
       <Footer />

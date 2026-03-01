@@ -10,7 +10,7 @@ export default function ProjectsPreview() {
       id="projects"
       className="border-t border-border"
       fullScreen
-      scrollCue={<ScrollCue href="#contact" label="Scroll to Contact section" />}
+      scrollCue={<ScrollCue href="#blog" label="Scroll to Blog section" />}
     >
       {/* Swipe-in header */}
       <div className="swipe-right mb-12">
