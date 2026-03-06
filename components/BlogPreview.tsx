@@ -19,10 +19,10 @@ const BLOGS: { title: string; excerpt: string; thumbnail: string | null; url: st
     url: "https://medium.com/p/010786bae2db",
   },
   {
-    title: "More articles coming soon",
-    excerpt: "Stay tuned for more writing on agentic AI, distributed systems, and the engineering behind intelligent automation.",
-    thumbnail: null, // no image yet
-    url: "#",
+    title: "Monolith vs Microservices: The Real Trade-offs Engineers Must Understand",
+    excerpt: "An exploration of monolithic and microservices architectures, focusing on scalability, system design trade-offs, and when each approach is the right choice for modern backend systems.",
+    thumbnail: "/images/monolith-microservices.png",
+    url: "https://medium.com/@sohamghosh_23912/monolith-vs-microservices-the-real-trade-offs-engineers-must-understand-b7ca06ecf1b2",
   },
   {
     title: "More articles coming soon",
